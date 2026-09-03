@@ -2,17 +2,15 @@
 
 ## Краткое описание
 
-Учебное ДЗ «Кейс 4. Разработка трекеров»: **три независимых MVP** в одном репозитории — **task-трекер на Laravel**, **Telegram-бот задач** и **трекер заявок «МастерДом»**. Отклики на биржах не отправлялись; кейсы собраны по реальным заказам FL.ru / Kwork и доработаны под сдачу. Запуск — **Docker Compose** на локальной машине или на своём сервере, когда нужна проверка или демо.
+Учебное ДЗ «Кейс 4. Разработка трекеров»: **три независимых MVP** в одном репозитории — **task-трекер на Laravel**, **Telegram-бот задач** и **трекер заявок «МастерДом»**. Кейсы собраны по реальным заказам FL.ru / Kwork. Запуск — **Docker Compose** на локальной машине (`docker compose up`).
 
-| Кейс | Папка | Заказ / база | Локальный URL |
-|------|-------|--------------|---------------|
+| Кейс | Папка | Заказ / база | Как открыть |
+|------|-------|--------------|-------------|
 | **1. TaskHub** | `case1-web-tasks/` | [FL.ru #4242426](https://www.fl.ru/projects/4242426/sdelat-task-treker-na-php-i-bootstrap.html) · [TaskHub](https://github.com/SpiritWalker84/TaskHub) | http://localhost:8086 |
-| **2. Telegram task bot** | `case2-telegram-tasks/` | [FL.ru #5450726](https://www.fl.ru/projects/5450726/task-manager---crm-v-telegram-bot.html) | Telegram (нужен `BOT_TOKEN`) |
+| **2. Telegram task bot** | `case2-telegram-tasks/` | [FL.ru #5450726](https://www.fl.ru/projects/5450726/task-manager---crm-v-telegram-bot.html) | Telegram после `docker compose up` |
 | **3. МастерДом** | `case3-service-requests/` | Kwork (CRM/заявки) · [Zayavki](https://github.com/SpiritWalker84/Zayavki) | http://localhost:8087 |
 
 **Как запускать.** В каждой папке: `cp .env.example .env`, при необходимости правки портов и секретов, затем `docker compose up -d --build`. Laravel-кейсы: `php artisan key:generate` и `migrate --seed` внутри контейнера `app`. Логи: `docker compose logs -f`. Остановка: `docker compose down`.
-
-**Документация ДЗ:** `FGip07_worknote_filled.docx` (генерация — `python3 fill_workbook.py`, файл локально / на Яндекс.Диске, в git не входит), ТЗ — `info/tz-case*.md`.
 
 Структура кода согласована с [Guide](https://github.com/SpiritWalker84/Guide) (`docs/conventions/`).
 
@@ -34,7 +32,6 @@
 | `info/tz-case1-taskhub.md` | ТЗ кейса №1 |
 | `info/tz-case2-telegram-tasks.md` | ТЗ кейса №2 |
 | `info/tz-case3-zayavki.md` | ТЗ кейса №3 (МастерДом) |
-| `fill_workbook.py` | Заполнение `FGip07_worknote_filled.docx` |
 
 ## Запуск
 
@@ -95,15 +92,17 @@ docker compose exec app php artisan view:clear   # после правок Blade
 
 **Проверка:** `/requests/create` без входа → диспетчер назначает мастера → мастер «Начать работу» / «Завершить» → две вкладки на одну заявку (одна ошибка).
 
-## Сценарии для скриншотов (тетрадь)
+## Проверка
 
-| Кейс | Что снять |
-|------|-----------|
+| Кейс | Что проверить |
+|------|---------------|
 | **1** | Логин, список/канбан, создание задачи, фильтр «Мои задачи» |
 | **2** | `/start`, список `/tasks`, создание `/new`, `/done` |
-| **3** | Логин, форма заявки, диспетчерская, «Мои выезды» мастера |
+| **3** | Логин, форма заявки, диспетчерская, «Мои выезды» мастера, race condition |
 
-Скриншоты и ссылку на **Яндекс.Диск** — в тетради вручную.
+1. **Кейс 1:** три роли, CRUD задач, канбан — http://localhost:8086
+2. **Кейс 2:** бот отвечает на команды, задачи в MySQL
+3. **Кейс 3:** цепочка статусов заявки, двойное «взять» блокируется
 
 ## Конфигурация
 
@@ -111,24 +110,11 @@ docker compose exec app php artisan view:clear   # после правок Blade
 
 | Переменная | Кейс | Описание |
 |------------|------|----------|
-| `APP_PORT` | 1, 3 | Порт на хосте (**8086** / **8087** по умолчанию в ДЗ) |
-| `APP_URL` | 1, 3 | URL приложения (`http://localhost:…` локально; при деплое — ваш домен) |
+| `APP_PORT` | 1, 3 | Порт на хосте (**8086** / **8087**) |
+| `APP_URL` | 1, 3 | `http://localhost:8086` или `http://localhost:8087` |
 | `DB_PORT` | 1, 3 | **3306** внутри контейнера (не менять на host-порт) |
 | `BOT_TOKEN` | 2 | Токен от [@BotFather](https://t.me/BotFather) |
 | `ADMIN_TELEGRAM_ID` | 2 | Telegram ID администратора |
-
-## Тетрадь
-
-```bash
-python3 fill_workbook.py   # → FGip07_worknote_filled.docx (локально)
-```
-
-## Проверка задания (кратко)
-
-1. **Кейс 1:** три роли, CRUD задач, канбан, приложение открывается на `:8086`.
-2. **Кейс 2:** бот отвечает на команды, задачи пишутся в MySQL.
-3. **Кейс 3:** заявка проходит цепочку статусов, race condition при двойном «взять» не проходит.
-4. **Тетрадь:** три кейса заполнены, скрины вставлены, ссылка на Диск указана.
 
 ## Лицензия
 
