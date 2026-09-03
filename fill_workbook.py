@@ -99,9 +99,9 @@ def main() -> None:
         "retest": "Вход под admin и user; создание и редактирование задачи; назначение исполнителя; комментарий; смена статуса; проверка прав на удаление.",
         "style": "Нейтральный минимализм (без брендбука у заказчика): светлая тема, акцент #2563eb, системный шрифт.",
         "github": "https://github.com/SpiritWalker84/TaskHub",
-        "public_url": "http://5.35.94.25:8086 (VPS, Docker). Демо: admin@taskhub.local / password",
+        "public_url": "http://localhost:8086 (Docker). Демо: admin@taskhub.local / password",
         "price": "25 000 ₽ (MVP без канбана в заказе — 15 000 ₽; с канбаном и деплоем — 25–35 000 ₽)",
-        "handoff": "GitHub + инструкция Docker на VPS; опционально — ежемесячная поддержка сервера.",
+        "handoff": "GitHub + инструкция Docker; опционально — поддержка сервера у клиента.",
         "upsell": "Поддержка сервера 2–3 тыс. ₽/мес; доработка канбана и уведомлений; интеграция с Telegram.",
         "fact_time": "2 ч 45 мин   Портфолио: [✓] да  [ ] нет",
     }
@@ -126,10 +126,10 @@ def main() -> None:
         "fixes": "1) «Исправь сброс состояния FSM после создания задачи». 2) «Добавь проверку: редактировать может постановщик или admin». 3) «При status=done отправляй сообщение creator_id».",
         "retest": "Два аккаунта Telegram; создание задачи; смена статуса; уведомление; список /tasks; роль admin видит все задачи.",
         "style": "Стандартный интерфейс Telegram, emoji-статусы (🆕 🔄 ✅), без отдельного брендбука.",
-        "github": "https://github.com/SpiritWalker84/FGIp07 (ветка case2-telegram) [создать при сдаче]",
-        "public_url": "VPS: docker compose в case2-telegram-tasks (нужен BOT_TOKEN от @BotFather)",
+        "github": "https://github.com/SpiritWalker84/FGIp07 (case2-telegram-tasks/)",
+        "public_url": "Docker: case2-telegram-tasks (нужен BOT_TOKEN от @BotFather). Запуск локально или на сервере клиента.",
         "price": "22 000 ₽ (бот + MySQL + инструкция); с канбан WebApp — 30 000 ₽",
-        "handoff": "Исходники на GitHub + .env.example + docker-compose; инструкция запуска на VPS.",
+        "handoff": "Исходники на GitHub + .env.example + docker-compose; инструкция запуска.",
         "upsell": "Хостинг бота; доработка Web App канбана; интеграция с Bitrix24.",
         "fact_time": "2 ч 10 мин   Портфолио: [✓] да  [ ] нет",
     }
@@ -147,17 +147,17 @@ def main() -> None:
         "features": "Публичная форма заявки; роли dispatcher/master; диспетчерская (таблица + назначение); панель мастера «Мои выезды»; статусы new/assigned/in_progress/done; защита от двойного взятия (race condition); UI бренда «МастерДом».",
         "questions": "1) Какие статусы заявки? 2) Нужны ли SMS клиенту? 3) Один или несколько мастеров на заявку? 4) Нужен ли мобильный вид для мастера на объекте? 5) Интеграция с 1С?",
         "spec": "info/tz-case3-zayavki.md + Zayavki README — экраны: /requests/create, /dispatcher, /master; MVP: new → assigned → in_progress → done.",
-        "project": "FGIp07/case3-service-requests/ (форк Zayavki, Laravel 11, MySQL, Docker на VPS :8087)",
-        "strategy": "[✓] поэтапно (деплой на VPS → редизайн UI «МастерДом» → правки UX профиля/карточек → тест ролей и скриншоты)",
+        "project": "FGIp07/case3-service-requests/ (форк Zayavki, Laravel 11, MySQL, Docker, порт 8087)",
+        "strategy": "[✓] поэтапно (Docker локально → редизайн UI «МастерДом» → правки UX профиля/карточек → тест ролей и скриншоты)",
         "prompt": "Доработай трекер заявок под бренд «МастерДом»: split-screen логин, sidebar для ролей, карточки выездов у мастера (адрес и телефон в приоритете), диспетчерская-таблица. Сохрани takeRequest с транзакцией против race condition.",
         "broken": "UI: в профиле дублировалась роль («Мастер Петров» + chip «Мастер»), аватар показывал одну букву «М»; сайдбар на мобилке ломался; у мастера было лишнее меню «Новая заявка». Карточки заявок были перегружены секциями.",
         "fixes": "1) «Раздели displayName и roleLabel, инициалы из ФИО (ПП)». 2) «Упрости карточки выездов: адрес заголовком, клиент/телефон в одном блоке». 3) «Навигация по роли: мастер — только Мои выезды». 4) «Убери декоративную палитру с экрана логина».",
         "retest": "Создание заявки без входа; вход dispatcher — назначение мастера; вход master1 — взять в работу и завершить; две вкладки на одну заявку (одна ошибка); скриншоты: login, create, dispatcher, master.",
         "style": "Бренд «МастерДом»: бирюза #0f766e + янтарный акцент, шрифт Plus Jakarta Sans, тёмный sidebar, split-screen авторизация, компактные карточки выездов (отличие от синего TaskHub в кейсе №1).",
         "github": "https://github.com/SpiritWalker84/Zayavki (база) + FGIp07/case3-service-requests/",
-        "public_url": "http://5.35.94.25:8087 (VPS, Docker). Демо: dispatcher@example.com / master1@example.com — пароль password",
+        "public_url": "http://localhost:8087 (Docker). Демо: dispatcher@example.com / master1@example.com — пароль password",
         "price": "22 000 ₽ (MVP заявок + деплой + UI под бренд; с SMS/Telegram — 30 000 ₽)",
-        "handoff": "GitHub + docker-compose на VPS; демо-логины; краткая инструкция для диспетчера.",
+        "handoff": "GitHub + docker-compose; демо-логины; краткая инструкция для диспетчера.",
         "upsell": "SMS/Telegram уведомления клиенту; отчёты по мастерам; PWA для мастера на объекте.",
         "fact_time": "2 ч 20 мин   Портфолио: [ ] да  [✓] нет (в портфолио — кейс №1)",
     }
@@ -172,7 +172,7 @@ def main() -> None:
     set_cell(prog, 2, 1, "2 ч 10 мин")
     set_cell(prog, 2, 2, "Шаблон aiogram из telegram-bots-portfolio")
     set_cell(prog, 3, 1, "2 ч 20 мин")
-    set_cell(prog, 3, 2, "Каркас Zayavki + деплой VPS + редизайн UI «МастерДом»")
+    set_cell(prog, 3, 2, "Каркас Zayavki + Docker + редизайн UI «МастерДом»")
 
     set_cell(
         doc.tables[150],
@@ -180,7 +180,7 @@ def main() -> None:
         0,
         "Анализ ТЗ и вопросы клиенту — быстрее: после трёх кейсов сразу выделяю роли, статусы и границу MVP. "
         "Промпты — поэтапные вместо одного большого; так быстрее получаю рабочий код. "
-        "Деплой на VPS (Docker, migrate, seed, порты) — уже по шаблону, без долгого разбора. "
+        "Деплой через Docker (migrate, seed, порты) — уже по шаблону, без долгого разбора. "
         "Тестирование — автоматически проверяю 2 роли, CRUD, смену статуса и граничные случаи (race condition в кейсе №3). "
         "Публикация — README, демо-логины и URL в одном формате.",
     )
@@ -196,7 +196,7 @@ def main() -> None:
         doc.tables[152],
         1,
         0,
-        "Кейс №1 TaskHub — самый сильный для портфолио: полный веб-трекер под FL.ru, канбан, фильтры, деплой на VPS. "
+        "Кейс №1 TaskHub — самый сильный для портфолио: полный веб-трекер под FL.ru, канбан, фильтры, Docker. "
         "№2 (Telegram) — хорош как второй формат (бот + MySQL). №3 (МастерДом) — учебный, но показывает заявки и UI под бренд.",
     )
 

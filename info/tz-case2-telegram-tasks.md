@@ -39,4 +39,4 @@ Python 3.12, aiogram 3, aiomysql, Docker.
 
 ## Деплой
 
-VPS + systemd или `docker compose up -d`. Требуется `BOT_TOKEN` от @BotFather.
+`docker compose up -d` в `case2-telegram-tasks/`. Требуется `BOT_TOKEN` от @BotFather. Запуск локально или на сервере клиента.

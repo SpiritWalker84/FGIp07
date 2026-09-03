@@ -37,4 +37,12 @@ Laravel 11, MySQL, Docker, Bootstrap/CSS.
 
 ## Деплой
 
-VPS: http://5.35.94.25:8086
+**URL (локально):** http://localhost:8086
+
+```bash
+cd case1-web-tasks
+cp .env.example .env   # APP_PORT=8086
+docker compose up -d --build
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate --seed
+```
