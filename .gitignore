@@ -1,0 +1,35 @@
+# Тетрадь — только локально / Яндекс.Диск
+*.docx
+
+# Секреты
+.env
+.env.*
+!.env.example
+
+# PHP / Laravel
+**/vendor/
+**/node_modules/
+**/public/build/
+**/public/hot/
+**/storage/*.key
+**/.phpunit.result.cache
+
+# Laravel runtime
+**/storage/framework/cache/**
+**/storage/framework/sessions/**
+**/storage/framework/views/**
+**/storage/logs/*.log
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+
+# IDE
+.idea/
+.vscode/
+.fleet/
+
+# OS
+.DS_Store
+Thumbs.db

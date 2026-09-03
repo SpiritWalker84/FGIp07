@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+!.env.example
+node_modules
+storage/logs/*
+.idea
+.vscode
+*.md
+analyze_odt.py
+ABC.odt
